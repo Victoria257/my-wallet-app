@@ -1,4 +1,4 @@
-import { ConnectWallet } from "../../components/ConnectWallet/ConnectWallet.jsx";
+import ConnectWallet from "../../components/ConnectWallet/ConnectWallet.jsx";
 import { Form } from "../../components/Form/Form.jsx";
 import { Logo } from "../../components/Logo/Logo.jsx";
 import css from "./MainPage.module.css";
@@ -13,8 +13,14 @@ export const MainPage = () => {
       <main>
         <Form />
       </main>
-      <footer>
-        <a>Репозиторій сайту</a>
+      <footer className={css.footer}>
+        <a
+          className={css.link}
+          href="https://github.com/Victoria257/my-wallet-app"
+          target="_blank"
+        >
+          Репозиторій сайту
+        </a>
       </footer>
     </div>
   );
