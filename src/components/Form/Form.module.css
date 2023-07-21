@@ -1,0 +1,16 @@
+.container {
+  margin-top: 100px;
+}
+
+.form {
+  outline: solid 1px brown;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 7px;
+}
+.input {
+  background-color: antiquewhite;
+  border-radius: 7px;
+}
