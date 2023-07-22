@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Web3Modal from "web3modal";
 import Web3 from "web3";
+import css from "./ConnectWallet.module.css";
 
 const ConnectWallet = ({
   web3,
@@ -18,7 +19,8 @@ const ConnectWallet = ({
     };
 
     const web3Modal = new Web3Modal({
-      //тестова мережа
+      //   network: "goerli", //тестова мережа Goerli
+      // network: "mainnet", //реальна мережа
       network: "sepolia",
       cacheProvider: true,
       providerOptions,
@@ -42,12 +44,14 @@ const ConnectWallet = ({
   return (
     <div>
       {connectedAddress ? (
-        <div>
-          <p>{connectedAddress}</p>
-          <p>Balance: {balance} ETH</p>
+        <div className={css.container}>
+          <p className={css.address}>{connectedAddress}</p>
+          <p className={css.balance}>Balance: {balance} ETH</p>
         </div>
       ) : (
-        <button onClick={connectWallet}>Connect Wallet</button>
+        <button className={css.button} onClick={connectWallet}>
+          Connect Wallet
+        </button>
       )}
     </div>
   );

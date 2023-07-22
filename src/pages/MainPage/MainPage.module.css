@@ -1,21 +1,42 @@
 .container {
-  outline: solid 1px red;
-  padding: 30px;
-  margin: 0 auto;
+  font-family: "Open Sans", sans-serif;
+  color: rgb(18, 18, 138);
+
+  max-width: 780px;
+  padding: 50px;
+  margin: 50px auto;
   text-align: center;
-  height: 100vh;
+  /* height: 100vh; */
+  background-color: rgb(219, 219, 247);
+  border-radius: 10px;
+  border: solid 3px rgb(164, 164, 227);
+
+  @media screen and (min-width: 480px) and (max-width: 779px) {
+    max-width: 480px;
+    padding: 50px 20px;
+  }
+  @media screen and (max-width: 479px) {
+    max-width: 479px;
+    padding: 30px 5px;
+  }
 }
 .header {
-  outline: solid 1px green;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: 779px) {
+    display: block;
+    text-align: start;
+  }
 }
 
 .footer {
   margin-top: 60px;
   text-align: right;
 }
-.link {
-  cursor: pointer;
+
+.gitIcon {
+  width: 40px;
+  height: 40px;
+  color: black;
 }

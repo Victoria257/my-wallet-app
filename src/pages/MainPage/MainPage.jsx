@@ -4,6 +4,7 @@ import { Form } from "../../components/Form/Form.jsx";
 import { Logo } from "../../components/Logo/Logo.jsx";
 import css from "./MainPage.module.css";
 import Web3 from "web3";
+import { FaGithub } from "react-icons/fa";
 
 export const MainPage = () => {
   const [web3, setWeb3] = useState(null);
@@ -23,12 +24,8 @@ export const MainPage = () => {
         <Form web3={web3} connectedAddress={connectedAddress} />
       </main>
       <footer className={css.footer}>
-        <a
-          className={css.link}
-          href="https://github.com/Victoria257/my-wallet-app"
-          target="_blank"
-        >
-          Репозиторій сайту
+        <a href="https://github.com/Victoria257/my-wallet-app" target="_blank">
+          <FaGithub className={css.gitIcon} />
         </a>
       </footer>
     </div>

@@ -1,0 +1,35 @@
+.container {
+  text-align: right;
+  @media screen and (max-width: 779px) {
+    margin-top: 40px;
+  }
+}
+
+.button {
+  cursor: pointer;
+  border-radius: 7px;
+  padding: 10px 30px;
+  background-color: rgb(164, 164, 227);
+  border: solid 2px rgb(135, 135, 232);
+
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: rgb(153, 153, 230);
+  }
+
+  @media screen and (max-width: 779px) {
+    margin-top: 40px;
+  }
+}
+
+.address {
+  padding: 0 10px;
+  overflow-wrap: break-word;
+}
+
+.balance {
+}

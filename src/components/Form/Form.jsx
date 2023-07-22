@@ -49,18 +49,18 @@ export const Form = ({ web3, connectedAddress }) => {
       <form className={css.form}>
         <input
           className={css.input}
-          placeholder="Адреса одержувача"
+          placeholder="Enter the recipient's address"
           onChange={onChangeAddress}
           value={address}
         />
         <input
           className={css.input}
-          placeholder="Кількість токенів"
+          placeholder="Enter the amount of tokens"
           onChange={onChangeAmount}
           value={amount}
         />
         <button className={css.button} type="submit" onClick={onSending}>
-          Відправити токени
+          Send tokens
         </button>
       </form>
     </div>

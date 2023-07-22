@@ -1,7 +1,10 @@
+import { FaEthereum } from "react-icons/fa";
+import css from "./Logo.module.css";
+
 export const Logo = () => {
   return (
     <div>
-      <h2>Logo</h2>
+      <FaEthereum className={css.icon} />
     </div>
   );
 };

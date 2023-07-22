@@ -1,24 +1,50 @@
 .container {
   margin-top: 100px;
+  padding: 10px 30px;
+  @media screen and (max-width: 479px) {
+    padding: 0;
+    margin: 70px 0;
+  }
 }
 
 .form {
   width: 350px;
-  outline: solid 1px brown;
+  border: solid 2px rgb(135, 135, 232);
   display: inline-flex;
   flex-direction: column;
   gap: 20px;
-  padding: 20px;
+  padding: 30px;
   border-radius: 7px;
+
+  @media screen and (min-width: 480px) and (max-width: 779px) {
+    max-width: 350px;
+    padding: 30px 10px;
+  }
+  @media screen and (max-width: 479px) {
+    max-width: 340px;
+    padding: 15px 3px;
+  }
 }
 .input {
   padding: 10px;
-  background-color: antiquewhite;
+  background-color: rgb(164, 164, 227);
   border-radius: 7px;
+  border: solid 2px rgb(135, 135, 232);
 }
 
 .button {
   padding: 10px;
-  background-color: rgb(243, 214, 176);
+  background-color: rgb(164, 164, 227);
   border-radius: 7px;
+  border: solid 2px rgb(135, 135, 232);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: rgb(148, 148, 225);
+  }
 }
