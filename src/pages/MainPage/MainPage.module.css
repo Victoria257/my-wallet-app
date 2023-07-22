@@ -3,6 +3,7 @@
   padding: 30px;
   margin: 0 auto;
   text-align: center;
+  height: 100vh;
 }
 .header {
   outline: solid 1px green;
@@ -12,6 +13,7 @@
 }
 
 .footer {
+  margin-top: 60px;
   text-align: right;
 }
 .link {

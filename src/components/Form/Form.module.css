@@ -3,6 +3,7 @@
 }
 
 .form {
+  width: 350px;
   outline: solid 1px brown;
   display: inline-flex;
   flex-direction: column;
@@ -11,6 +12,13 @@
   border-radius: 7px;
 }
 .input {
+  padding: 10px;
   background-color: antiquewhite;
+  border-radius: 7px;
+}
+
+.button {
+  padding: 10px;
+  background-color: rgb(243, 214, 176);
   border-radius: 7px;
 }

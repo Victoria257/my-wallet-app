@@ -1,10 +1,13 @@
-import React, {  useState } from "react";
-import Web3 from "web3";
+import React, { useState } from "react";
 import Web3Modal from "web3modal";
+import Web3 from "web3";
 
-const ConnectWallet = () => {
-  const [web3, setWeb3] = useState(null);
-  const [connectedAddress, setConnectedAddress] = useState("");
+const ConnectWallet = ({
+  web3,
+  setWeb3,
+  connectedAddress,
+  setConnectedAddress,
+}) => {
   const [balance, setBalance] = useState("");
 
   const connectWallet = async () => {
@@ -15,7 +18,8 @@ const ConnectWallet = () => {
     };
 
     const web3Modal = new Web3Modal({
-      network: "mainnet",
+      //тестова мережа
+      network: "sepolia",
       cacheProvider: true,
       providerOptions,
     });
