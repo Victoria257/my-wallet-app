@@ -41,18 +41,16 @@ const ConnectWallet = ({
     }
   };
 
+  const visualBalance = balance.slice(0, 5);
+  const visualAddress =
+    connectedAddress.slice(0, 5) + "..." + connectedAddress.slice(-4);
   return (
     <div>
-      {connectedAddress ? (
-        <div className={css.container}>
-          <p className={css.address}>{connectedAddress}</p>
-          <p className={css.balance}>Balance: {balance} ETH</p>
-        </div>
-      ) : (
-        <button className={css.button} onClick={connectWallet}>
-          Connect Wallet
-        </button>
-      )}
+      <button className={css.button} onClick={connectWallet}>
+        {!connectedAddress
+          ? "Connect Wallet"
+          : `${visualBalance}     ${visualAddress}`}
+      </button>
     </div>
   );
 };

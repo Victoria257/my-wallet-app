@@ -6,14 +6,12 @@
 }
 
 .button {
-  position: absolute;
-  right: 0;
-  top: -20px;
   cursor: pointer;
   border-radius: 7px;
   padding: 10px 30px;
   background-color: rgb(164, 164, 227);
   border: solid 2px rgb(135, 135, 232);
+  white-space: pre;
 
   font-size: 16px;
   font-weight: 500;
@@ -23,16 +21,4 @@
   &:active {
     background-color: rgb(153, 153, 230);
   }
-
-  @media screen and (max-width: 779px) {
-    margin-top: 40px;
-  }
-}
-
-.address {
-  padding: 0 10px;
-  overflow-wrap: break-word;
-}
-
-.balance {
 }

@@ -1,6 +1,7 @@
 import Web3 from "web3";
 import { useState } from "react";
 import css from "./Form.module.css";
+import { Checksum } from "../Checksum/Checksum";
 
 export const Form = ({ web3, connectedAddress }) => {
   const [address, setAddress] = useState("");
@@ -27,7 +28,7 @@ export const Form = ({ web3, connectedAddress }) => {
 
       alert("Платіж пройшов успішно");
       setAddress("");
-      setAmount(0);
+      setAmount("");
     } catch (error) {
       alert("Платіж не пройшов");
       console.error("Error sending tokens:", error);
@@ -44,6 +45,10 @@ export const Form = ({ web3, connectedAddress }) => {
     console.log(event.target.value);
   };
 
+  const addressRegex = /^0x([0-9A-Fa-f]{40})$/;
+  const isValidFormatAddress = addressRegex.test(address);
+  // const checksumAddress = Checksum(address);
+  // console.log(checksumAddress);
   return (
     <div className={css.container}>
       <form className={css.form}>

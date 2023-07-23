@@ -24,7 +24,11 @@ export const MainPage = () => {
         <Form web3={web3} connectedAddress={connectedAddress} />
       </main>
       <footer className={css.footer}>
-        <a href="https://github.com/Victoria257/my-wallet-app" target="_blank">
+        <a
+          href="https://github.com/Victoria257/my-wallet-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <FaGithub className={css.gitIcon} />
         </a>
       </footer>
