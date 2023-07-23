@@ -8,9 +8,9 @@ const ConnectWallet = ({
   setWeb3,
   connectedAddress,
   setConnectedAddress,
+  balance,
+  setBalance,
 }) => {
-  const [balance, setBalance] = useState("");
-
   const connectWallet = async () => {
     const providerOptions = {
       metamask: {
@@ -20,8 +20,8 @@ const ConnectWallet = ({
 
     const web3Modal = new Web3Modal({
       //   network: "goerli", //тестова мережа Goerli
-      network: "mainnet", //реальна мережа
-      // network: "sepolia",
+      // network: "mainnet", //реальна мережа
+      network: "sepolia",
       cacheProvider: true,
       providerOptions,
     });

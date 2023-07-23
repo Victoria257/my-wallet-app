@@ -2,12 +2,14 @@ import Web3 from "web3";
 import { useState } from "react";
 import css from "./Form.module.css";
 
-export const Form = ({ web3, connectedAddress }) => {
+export const Form = ({ web3, connectedAddress, balance, setBalance }) => {
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
 
   const onSending = async (event) => {
+    console.log(amount);
+    console.log(balance);
     event.preventDefault();
     if (!web3) {
       alert(
@@ -15,36 +17,56 @@ export const Form = ({ web3, connectedAddress }) => {
       );
       return;
     }
+    const amountWithDot = amount.replace(",", ".");
 
-    setLoading(true);
     const addressRegex = /^0x([0-9A-Fa-f]{40})$/;
     const validAddress = web3.utils.isAddress(address);
     const checksumAddress = addressRegex.test(address);
+    const amountRegex = /^\d+(\.\d+)?$/;
 
-    const amountRegex = /^\d+\.\d+$/;
-    const validAmount = amountRegex.test(amount);
+    const validAmount = amountRegex.test(amountWithDot);
 
+    if (!validAmount) {
+      alert("Неприпустима сума.введіть ціле або дробне число");
+
+      return;
+    }
+
+    if (amountWithDot < 0.000001 || amountWithDot > 100000) {
+      alert(
+        "Неприпустима сума. Сума повинна бути в діапазоні від 0.000001 до 100000 ."
+      );
+      return;
+    }
+
+    if (amountWithDot > 0 && amountWithDot % 10 === 0) {
+      alert("Неприпустима сума. Цілі числа не можуть бути кратними 10.");
+      return;
+    }
+
+    if (amountWithDot > balance) {
+      alert("Недостатньо токенів на рахунку");
+      return;
+    }
+    if (!validAddress || !checksumAddress) {
+      alert("wrong address");
+
+      return;
+    }
     try {
-      if (!validAmount) {
-        alert("введіть число використовуючи крапку як роздільник");
-        return;
-      } else if (!validAddress || !checksumAddress) {
-        alert("wrong address");
-        return;
-      } else {
-        const amountInWei = web3.utils.toWei(amount.toString());
+      setLoading(true);
 
-        await web3.eth.sendTransaction({
-          to: address,
-          from: connectedAddress,
-          value: amountInWei,
-        });
+      const amountInWei = web3.utils.toWei(amountWithDot.toString());
+      await web3.eth.sendTransaction({
+        to: address,
+        from: connectedAddress,
+        value: amountInWei,
+      });
 
-        alert("Платіж пройшов успішно");
-        // setAddress("");
-        // setAmount("");
-        window.location.reload();
-      }
+      alert("Платіж пройшов успішно");
+      // setAddress("");
+      // setAmount("");
+      window.location.reload();
     } catch (error) {
       alert("Платіж не пройшов");
       console.error("Error sending tokens:", error);

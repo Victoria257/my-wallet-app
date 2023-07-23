@@ -9,6 +9,7 @@ import { FaGithub } from "react-icons/fa";
 export const MainPage = () => {
   const [web3, setWeb3] = useState(null);
   const [connectedAddress, setConnectedAddress] = useState("");
+  const [balance, setBalance] = useState("");
   return (
     <div className={css.container}>
       <header className={css.header}>
@@ -18,10 +19,17 @@ export const MainPage = () => {
           setWeb3={setWeb3}
           connectedAddress={connectedAddress}
           setConnectedAddress={setConnectedAddress}
+          balance={balance}
+          setBalance={setBalance}
         />
       </header>
       <main>
-        <Form web3={web3} connectedAddress={connectedAddress} />
+        <Form
+          web3={web3}
+          connectedAddress={connectedAddress}
+          balance={balance}
+          setBalance={setBalance}
+        />
       </main>
       <footer className={css.footer}>
         <a
