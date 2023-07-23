@@ -6,6 +6,7 @@ import { Checksum } from "../Checksum/Checksum";
 export const Form = ({ web3, connectedAddress }) => {
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onSending = async (event) => {
     event.preventDefault();
@@ -19,6 +20,7 @@ export const Form = ({ web3, connectedAddress }) => {
 
     try {
       const amountInWei = web3.utils.toWei(amount.toString());
+      setLoading(true);
 
       await web3.eth.sendTransaction({
         to: address,
@@ -27,11 +29,14 @@ export const Form = ({ web3, connectedAddress }) => {
       });
 
       alert("Платіж пройшов успішно");
-      setAddress("");
-      setAmount("");
+      // setAddress("");
+      // setAmount("");
+      window.location.reload();
     } catch (error) {
       alert("Платіж не пройшов");
       console.error("Error sending tokens:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -45,10 +50,9 @@ export const Form = ({ web3, connectedAddress }) => {
     console.log(event.target.value);
   };
 
-  const addressRegex = /^0x([0-9A-Fa-f]{40})$/;
-  const isValidFormatAddress = addressRegex.test(address);
-  // const checksumAddress = Checksum(address);
-  // console.log(checksumAddress);
+  // const addressRegex = /^0x([0-9A-Fa-f]{40})$/;
+  // const isValidFormatAddress = addressRegex.test(address);
+
   return (
     <div className={css.container}>
       <form className={css.form}>
@@ -64,8 +68,13 @@ export const Form = ({ web3, connectedAddress }) => {
           onChange={onChangeAmount}
           value={amount}
         />
-        <button className={css.button} type="submit" onClick={onSending}>
-          Send tokens
+        <button
+          className={css.button}
+          type="submit"
+          onClick={onSending}
+          disabled={loading}
+        >
+          {loading ? "Loading..." : "Send tokens"}
         </button>
       </form>
     </div>
