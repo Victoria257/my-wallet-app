@@ -20,8 +20,8 @@ const ConnectWallet = ({
 
     const web3Modal = new Web3Modal({
       //   network: "goerli", //тестова мережа Goerli
-      // network: "mainnet", //реальна мережа
-      network: "sepolia",
+      network: "mainnet", //реальна мережа
+      // network: "sepolia",
       cacheProvider: true,
       providerOptions,
     });
