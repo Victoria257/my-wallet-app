@@ -13,15 +13,21 @@
   @media screen and (min-width: 480px) and (max-width: 779px) {
     max-width: 480px;
     padding: 50px 20px;
+    min-height: calc(100vh - 100px);
+    margin: 0 auto;
   }
   @media screen and (max-width: 479px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     max-width: 479px;
     padding: 30px 5px;
-    margin: 50px 0;
-    height: 100vh;
+    margin: 0 auto;
+    height: calc(100vh - 60px);
   }
 }
 .header {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,6 +40,9 @@
 .footer {
   margin-top: 60px;
   text-align: right;
+  @media screen and (max-width: 479px) {
+    padding-bottom: 40px;
+  }
 }
 
 .gitIcon {
