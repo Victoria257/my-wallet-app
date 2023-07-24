@@ -1,15 +1,15 @@
 import Web3 from "web3";
-import { useState } from "react";
+
 import css from "./Form.module.css";
 
-export const Form = ({ web3, connectedAddress, balance }) => {
+import { useState } from "react";
+
+export const Form = ({ web3, connectedAddress, balance, setBalance }) => {
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
 
   const onSending = async (event) => {
-    console.log(amount);
-    console.log(balance);
     event.preventDefault();
     if (!web3) {
       alert(
@@ -64,7 +64,12 @@ export const Form = ({ web3, connectedAddress, balance }) => {
       });
 
       alert("Платіж пройшов успішно");
-      window.location.reload();
+
+      const updatedBalance = await web3.eth.getBalance(connectedAddress);
+      setBalance(web3.utils.fromWei(updatedBalance, "ether"));
+
+      setAmount("");
+      setAddress("");
     } catch (error) {
       alert("Платіж не пройшов");
       console.error("Error sending tokens:", error);
