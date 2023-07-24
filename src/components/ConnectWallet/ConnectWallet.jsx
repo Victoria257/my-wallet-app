@@ -46,7 +46,12 @@ const ConnectWallet = ({
     connectedAddress.slice(0, 5) + "..." + connectedAddress.slice(-4);
   return (
     <div>
-      <button className={css.button} onClick={connectWallet}>
+      <button
+        className={
+          connectedAddress ? `${css.activeButton} ${css.button}` : css.button
+        }
+        onClick={connectWallet}
+      >
         {!connectedAddress
           ? "Connect Wallet"
           : `${visualBalance}     ${visualAddress}`}

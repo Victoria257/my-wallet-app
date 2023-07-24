@@ -2,7 +2,7 @@ import Web3 from "web3";
 import { useState } from "react";
 import css from "./Form.module.css";
 
-export const Form = ({ web3, connectedAddress, balance, setBalance }) => {
+export const Form = ({ web3, connectedAddress, balance }) => {
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
@@ -64,8 +64,6 @@ export const Form = ({ web3, connectedAddress, balance, setBalance }) => {
       });
 
       alert("Платіж пройшов успішно");
-      // setAddress("");
-      // setAmount("");
       window.location.reload();
     } catch (error) {
       alert("Платіж не пройшов");
@@ -84,7 +82,7 @@ export const Form = ({ web3, connectedAddress, balance, setBalance }) => {
   };
 
   return (
-    <div className={css.container}>
+    <div>
       <form className={css.form}>
         <input
           className={css.input}

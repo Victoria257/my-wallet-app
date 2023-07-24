@@ -10,36 +10,31 @@
   border-radius: 10px;
   border: solid 3px rgb(164, 164, 227);
 
-  @media screen and (min-width: 480px) and (max-width: 779px) {
+  @media screen and (max-width: 779px) {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     max-width: 480px;
-    padding: 50px 20px;
+    padding: 50px 5px;
     min-height: calc(100vh - 100px);
     margin: 0 auto;
-  }
-  @media screen and (max-width: 479px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    max-width: 479px;
-    padding: 30px 5px;
-    margin: 0 auto;
-    height: calc(100vh - 60px);
   }
 }
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media screen and (min-width: 480px) and (max-width: 779px) {
+    padding: 0 30px;
+  }
 }
 
 .footer {
   margin-top: 60px;
   text-align: right;
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 779px) {
     padding-bottom: 40px;
+    padding-right: 30px;
   }
 }
 
