@@ -19,13 +19,21 @@
     min-height: calc(100vh - 100px);
     margin: 0 auto;
   }
+
+  @media screen and (max-height: 779px) and (orientation: landscape) {
+    padding: 10px 30px;
+  }
 }
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   @media screen and (min-width: 480px) and (max-width: 779px) {
     padding: 0 30px;
+  }
+  @media screen and (max-height: 779px) and (orientation: landscape) {
+    padding: 0;
   }
 }
 

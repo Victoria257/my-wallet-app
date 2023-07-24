@@ -17,6 +17,10 @@
     padding: 15px 3px;
     margin: 70px 0;
   }
+
+  @media screen and (max-height: 779px) and (orientation: landscape) {
+    margin-top: 40px;
+  }
 }
 
 .input {
