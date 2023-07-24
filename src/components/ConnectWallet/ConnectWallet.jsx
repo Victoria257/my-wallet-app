@@ -4,7 +4,6 @@ import Web3 from "web3";
 import css from "./ConnectWallet.module.css";
 
 const ConnectWallet = ({
-  web3,
   setWeb3,
   connectedAddress,
   setConnectedAddress,
@@ -37,7 +36,9 @@ const ConnectWallet = ({
       const balance = await web3Instance.eth.getBalance(accounts[0]);
       setBalance(web3Instance.utils.fromWei(balance, "ether"));
     } catch (error) {
-      console.error("Error connecting wallet:", error);
+      toast.error(
+        "The wallet is not available. Make sure you are connected to the wallet."
+      );
     }
   };
 

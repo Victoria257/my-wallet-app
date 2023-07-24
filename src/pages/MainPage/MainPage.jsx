@@ -3,8 +3,8 @@ import ConnectWallet from "../../components/ConnectWallet/ConnectWallet.jsx";
 import { Form } from "../../components/Form/Form.jsx";
 import { Logo } from "../../components/Logo/Logo.jsx";
 import css from "./MainPage.module.css";
-import Web3 from "web3";
 import { FaGithub } from "react-icons/fa";
+import { Toaster } from "react-hot-toast";
 
 export const MainPage = () => {
   const [web3, setWeb3] = useState(null);
@@ -12,6 +12,7 @@ export const MainPage = () => {
   const [balance, setBalance] = useState("");
   return (
     <div className={css.container}>
+      <Toaster position="top-right" reverseOrder={true} />
       <header className={css.header}>
         <Logo />
         <ConnectWallet

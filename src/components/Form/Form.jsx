@@ -1,8 +1,7 @@
-import Web3 from "web3";
-
 import css from "./Form.module.css";
 
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 export const Form = ({ web3, connectedAddress, balance, setBalance }) => {
   const [address, setAddress] = useState("");
@@ -12,8 +11,8 @@ export const Form = ({ web3, connectedAddress, balance, setBalance }) => {
   const onSending = async (event) => {
     event.preventDefault();
     if (!web3) {
-      alert(
-        "Гаманець недоступний. Переконайтеся, що ви підключені до гаманця."
+      toast.error(
+        "The wallet is not available. Make sure you are connected to the wallet."
       );
       return;
     }
@@ -26,33 +25,36 @@ export const Form = ({ web3, connectedAddress, balance, setBalance }) => {
 
     const validAmount = amountRegex.test(amountWithDot);
 
+    if (!validAddress || !checksumAddress) {
+      toast.error("Wrong address!");
+
+      return;
+    }
+
     if (!validAmount) {
-      alert("Неприпустима сума.введіть ціле або дробне число");
+      toast.error("Invalid amount. Enter a whole or fractional number.");
 
       return;
     }
 
     if (amountWithDot < 0.000001 || amountWithDot > 100000) {
-      alert(
-        "Неприпустима сума. Сума повинна бути в діапазоні від 0.000001 до 100000 ."
+      toast.error(
+        "Unacceptable amount. The amount must be in the range from 0.000001 to 100000."
       );
       return;
     }
 
     if (amountWithDot > 0 && amountWithDot % 10 === 0) {
-      alert("Неприпустима сума. Цілі числа не можуть бути кратними 10.");
+      toast.error("Unacceptable amount. Integers cannot be multiples of 10.");
+
       return;
     }
 
     if (amountWithDot > balance) {
-      alert("Недостатньо токенів на рахунку");
+      toast.error("There are not enough tokens in the account.");
       return;
     }
-    if (!validAddress || !checksumAddress) {
-      alert("wrong address");
 
-      return;
-    }
     try {
       setLoading(true);
 
@@ -62,8 +64,7 @@ export const Form = ({ web3, connectedAddress, balance, setBalance }) => {
         from: connectedAddress,
         value: amountInWei,
       });
-
-      alert("Платіж пройшов успішно");
+      toast.success("The payment was successful!");
 
       const updatedBalance = await web3.eth.getBalance(connectedAddress);
       setBalance(web3.utils.fromWei(updatedBalance, "ether"));
@@ -71,8 +72,7 @@ export const Form = ({ web3, connectedAddress, balance, setBalance }) => {
       setAmount("");
       setAddress("");
     } catch (error) {
-      alert("Платіж не пройшов");
-      console.error("Error sending tokens:", error);
+      toast.error("Error sending tokens!");
     } finally {
       setLoading(false);
     }
