@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Web3Modal from "web3modal";
 import Web3 from "web3";
 import css from "./ConnectWallet.module.css";
+import { toast } from "react-hot-toast";
 
 const ConnectWallet = ({
   setWeb3,
