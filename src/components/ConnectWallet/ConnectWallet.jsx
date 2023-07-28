@@ -46,7 +46,7 @@ const ConnectWallet = ({
   const connectWallet = async () => {
     if (isMobile) {
       if (!metaMaskSDK) {
-        toast.error("MetaMask SDK не ініціалізовано.");
+        toast.error("Failed to connect.");
         return;
       }
 
@@ -65,14 +65,14 @@ const ConnectWallet = ({
 
         checkBalance({ setBalance, selectedAddress });
       } catch (error) {
-        toast.error("Не вдалося підключитись до гаманця.");
+        toast.error("Failed to connect.");
       }
     } else {
       // Підключення на комп'ютері за допомогою detectEthereumProvider
       const provider = await detectEthereumProvider({ silent: true });
       if (!provider) {
         toast.error(
-          "MetaMask не встановлено або недоступний. Будь ласка, встановіть його для підключення."
+          "MetaMask is not installed or not available. Please install it to connect."
         );
         return;
       }
@@ -88,7 +88,7 @@ const ConnectWallet = ({
         setBalance(web3Instance.utils.fromWei(localBalance, "ether"));
       } catch (error) {
         toast.error(
-          "Гаманець недоступний. Переконайтесь, що ви підключені до гаманця."
+          "MetaMask is not installed or not available. Please install it to connect."
         );
       }
     }
@@ -108,7 +108,7 @@ const ConnectWallet = ({
         onClick={connectWallet}
       >
         {!connectedAddress
-          ? "Підключити гаманець"
+          ? "Connect Wallet"
           : `${visualBalance}     ${visualAddress}`}
       </button>
     </div>

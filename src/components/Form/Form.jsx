@@ -65,35 +65,26 @@ export const Form = ({
       return;
     }
 
-    // відправка через ethereum.request для мобільного пристрою з MetaMask SDK
     if (isMobile && metaMaskSDK) {
       try {
         setLoading(true);
 
         const amountInWei = web3.utils.toWei(amountWithDot.toString(), "ether");
 
-        await ethereum.request({
-          method: "eth_sendTransaction",
-          params: [
-            {
-              to: address,
-              from: connectedAddress,
-              value: web3.utils.toHex(amountInWei),
-            },
-          ],
-        });
+        const transactionParameters = {
+          to: address,
+          from: connectedAddress,
+          value: web3.utils.toHex(amountInWei),
+        };
 
-        // Запит на підтвердження транзакції через MetaMask
-        await window.ethereum.request({
+        await ethereum.request({
           method: "eth_sendTransaction",
           params: [transactionParameters],
         });
 
         toast.success("The payment was successful!");
 
-        // Отримання оновленого балансу у форматі ether
-        const updatedBalance = checkBalance({ setBalance, selectedAddress });
-        setBalance(web3.utils.fromWei(updatedBalance, "ether"));
+        const updatedBalance = checkBalance({ setBalance, connectedAddress });
 
         setAmount("");
         setAddress("");
@@ -103,7 +94,7 @@ export const Form = ({
         setLoading(false);
       }
     } else {
-      // відправка для десктопної версії або мобільного без MetaMask SDK
+      // відправка для десктопної версії
       try {
         setLoading(true);
 
