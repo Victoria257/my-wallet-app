@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       <Toaster reverseOrder={true} />
-      <MainPage />;
+      <MainPage />
     </div>
   );
 }
