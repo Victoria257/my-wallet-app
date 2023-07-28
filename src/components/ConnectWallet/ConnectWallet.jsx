@@ -3,6 +3,7 @@ import Web3 from "web3";
 import css from "./ConnectWallet.module.css";
 import { toast } from "react-hot-toast";
 import detectEthereumProvider from "@metamask/detect-provider";
+import { checkBalance } from "../../checkBalance";
 
 const ConnectWallet = ({
   setWeb3,
@@ -10,10 +11,11 @@ const ConnectWallet = ({
   setConnectedAddress,
   balance,
   setBalance,
+  metaMaskSDK,
+  setMetaMaskSDK,
+  isMobile,
+  setIsMobile,
 }) => {
-  const [metaMaskSDK, setMetaMaskSDK] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
-
   useEffect(() => {
     const checkIsMobile = () => {
       const isMobileDevice =
@@ -41,29 +43,6 @@ const ConnectWallet = ({
     }
   }, [isMobile]);
 
-  const checkBalance = async (selectedAddress) => {
-    // Infura
-    const infuraWeb = new Web3(
-      new Web3.providers.HttpProvider(
-        `https://sepolia.infura.io/v3/eabcc631d2d1489b8f793ab2c0ea0353`
-      )
-    );
-
-    try {
-      // Get balance using Infura provider
-      const infuraBalance = await infuraWeb.eth.getBalance(selectedAddress);
-      const stringInfuraBalance = infuraWeb.utils.fromWei(
-        infuraBalance,
-        "ether"
-      );
-      toast.success(stringInfuraBalance);
-      setBalance(stringInfuraBalance);
-    } catch (error) {
-      toast.error("error");
-      console.error(error);
-    }
-  };
-
   const connectWallet = async () => {
     if (isMobile) {
       if (!metaMaskSDK) {
@@ -84,12 +63,7 @@ const ConnectWallet = ({
 
         setConnectedAddress(selectedAddress);
 
-        checkBalance(selectedAddress);
-
-        // const localBalance = await web3Instance.eth.getBalance(selectedAddress);
-        // const stringBalance = web3Instance.utils.fromWei(localBalance, "ether");
-
-        setBalance("44");
+        checkBalance({ setBalance, selectedAddress });
       } catch (error) {
         toast.error("Не вдалося підключитись до гаманця.");
       }

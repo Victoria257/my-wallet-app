@@ -2,8 +2,18 @@ import css from "./Form.module.css";
 
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { checkBalance } from "../../checkBalance";
 
-export const Form = ({ web3, connectedAddress, balance, setBalance }) => {
+export const Form = ({
+  web3,
+  connectedAddress,
+  balance,
+  setBalance,
+  metaMaskSDK,
+  setMetaMaskSDK,
+  isMobile,
+  setIsMobile,
+}) => {
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
@@ -55,26 +65,65 @@ export const Form = ({ web3, connectedAddress, balance, setBalance }) => {
       return;
     }
 
-    try {
-      setLoading(true);
+    // відправка через ethereum.request для мобільного пристрою з MetaMask SDK
+    if (isMobile && metaMaskSDK) {
+      try {
+        setLoading(true);
 
-      const amountInWei = web3.utils.toWei(amountWithDot.toString());
-      await web3.eth.sendTransaction({
-        to: address,
-        from: connectedAddress,
-        value: amountInWei,
-      });
-      toast.success("The payment was successful!");
+        const amountInWei = web3.utils.toWei(amountWithDot.toString());
+        await ethereum.request({
+          method: "eth_sendTransaction",
+          params: [
+            {
+              to: address,
+              from: connectedAddress,
+              value: amountInWei,
+            },
+          ],
+        });
 
-      const updatedBalance = await web3.eth.getBalance(connectedAddress);
-      setBalance(web3.utils.fromWei(updatedBalance, "ether"));
+        // Запит на підтвердження транзакції через MetaMask
+        await window.ethereum.request({
+          method: "eth_sendTransaction",
+          params: [transactionParameters],
+        });
 
-      setAmount("");
-      setAddress("");
-    } catch (error) {
-      toast.error("Error sending tokens!");
-    } finally {
-      setLoading(false);
+        toast.success("The payment was successful!");
+
+        // Отримання оновленого балансу у форматі ether
+        const updatedBalance = checkBalance({ setBalance, selectedAddress });
+        setBalance(web3.utils.fromWei(updatedBalance, "ether"));
+
+        setAmount("");
+        setAddress("");
+      } catch (error) {
+        toast.error("Error sending tokens!");
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      // відправка для десктопної версії або мобільного без MetaMask SDK
+      try {
+        setLoading(true);
+
+        const amountInWei = web3.utils.toWei(amountWithDot.toString());
+        await web3.eth.sendTransaction({
+          to: address,
+          from: connectedAddress,
+          value: amountInWei,
+        });
+        toast.success("The payment was successful!");
+
+        const updatedBalance = await web3.eth.getBalance(connectedAddress);
+        setBalance(web3.utils.fromWei(updatedBalance, "ether"));
+
+        setAmount("");
+        setAddress("");
+      } catch (error) {
+        toast.error("Error sending tokens!");
+      } finally {
+        setLoading(false);
+      }
     }
   };
 

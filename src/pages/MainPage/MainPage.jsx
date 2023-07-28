@@ -9,6 +9,8 @@ export const MainPage = () => {
   const [web3, setWeb3] = useState(null);
   const [connectedAddress, setConnectedAddress] = useState("");
   const [balance, setBalance] = useState("");
+  const [metaMaskSDK, setMetaMaskSDK] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
   return (
     <div className={css.container}>
       <header className={css.header}>
@@ -20,6 +22,10 @@ export const MainPage = () => {
           setConnectedAddress={setConnectedAddress}
           balance={balance}
           setBalance={setBalance}
+          metaMaskSDK={metaMaskSDK}
+          setMetaMaskSDK={setMetaMaskSDK}
+          isMobile={isMobile}
+          setIsMobile={setIsMobile}
         />
       </header>
       <main>
@@ -28,6 +34,10 @@ export const MainPage = () => {
           connectedAddress={connectedAddress}
           balance={balance}
           setBalance={setBalance}
+          metaMaskSDK={metaMaskSDK}
+          setMetaMaskSDK={setMetaMaskSDK}
+          isMobile={isMobile}
+          setIsMobile={setIsMobile}
         />
       </main>
       <footer className={css.footer}>
