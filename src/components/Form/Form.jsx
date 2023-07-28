@@ -70,14 +70,15 @@ export const Form = ({
       try {
         setLoading(true);
 
-        const amountInWei = web3.utils.toWei(amountWithDot.toString());
+        const amountInWei = web3.utils.toWei(amountWithDot.toString(), "ether");
+
         await ethereum.request({
           method: "eth_sendTransaction",
           params: [
             {
               to: address,
               from: connectedAddress,
-              value: amountInWei,
+              value: web3.utils.toHex(amountInWei),
             },
           ],
         });

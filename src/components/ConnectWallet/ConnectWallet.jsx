@@ -94,9 +94,10 @@ const ConnectWallet = ({
     }
   };
 
-  const visualBalance = balance.slice(0, 5);
-  const visualAddress =
-    connectedAddress.slice(0, 5) + "..." + connectedAddress.slice(-4);
+  const visualBalance = balance ? balance.slice(0, 5) : "";
+  const visualAddress = connectedAddress
+    ? connectedAddress.slice(0, 5) + "..." + connectedAddress.slice(-4)
+    : "";
 
   return (
     <div>
